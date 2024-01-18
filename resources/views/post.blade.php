@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stadslab posts</title>
-    <link rel="stylesheet" href="/app.css">
-</head>
-<body>
+@extends('layout')
+@section('content')
     <article>
-    <?= $post;?>
+        <h1>{{$post->title}}</h1>
+        <div>{{$post->body}}</div>
     </article>
-    <h1><a href="/">go back</a></h1>
-</body>
-</html>
+    <h5><a href="/">go back</a></h5>
+    @endsection

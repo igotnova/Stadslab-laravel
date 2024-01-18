@@ -3,31 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent;
-use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
 
-class Post
+class Post extends Model
 {
-    public static function all()
-    {
-        $files = File::files(resource_path("posts/"));
+    use HasFactory;
 
-        return array_map(function ($file) {
-            return $file->getContents();
-        }, $files);
-        // return $files;
-    }
+    protected $fillable = ['title', 'excerpt', 'body'];
 
-
-    public static function find($slug)
-    {
-
-        if (! file_exists($path = resource_path("posts/{$slug}.html"))) {
-            //   throw new ModelNotFoundException();
+        public function getRouteKeyName()
+        {
+            return parent::getRouteKeyName();
         }
-       return cache()->remember("posts.{$slug}", 5, function () use ($path){
-            return file_get_contents($path);
-        });
 
-    }
+
 }
