@@ -9,12 +9,17 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'excerpt', 'body'];
+    protected $fillable = ['title','category_id','slug','excerpt', 'body'];
 
-    // public function getRouteKeyName()
-    // {
-    //     return 'title';
-    // }
+    protected $with = ['category', 'author'];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
