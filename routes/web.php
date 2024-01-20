@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
@@ -22,6 +22,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
+
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 
@@ -30,9 +31,3 @@ Route::get('authors/{author:username}', function (User $author) {
         'posts' =>   $author->posts
     ]);
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
