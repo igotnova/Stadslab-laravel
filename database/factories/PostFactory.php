@@ -20,8 +20,8 @@ class PostFactory extends Factory
             'category_id' => $this->faker->numberBetween(1,3),
             'title' => $this->faker->word(),
             'slug' => $this->faker->unique()->word(),
-            'excerpt' => $this->faker->sentence(),
-            'body' => $this->faker->paragraph()
+            'excerpt' => '<p>' .  $this->faker->paragraph(6) .'</p>',
+            'body' => '<p>' . $this->faker->paragraph(20).'</p>'
         ];
     }
 }
