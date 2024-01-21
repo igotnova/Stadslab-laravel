@@ -21,13 +21,29 @@
                                         <tr>
                                             <td class="adm asb atm aub avz awd axu cgf"> <a href="/posts/{{$post->slug}}">{{$post->title}}</a></td>
                                             <td class="adm are asb avz axq">{{$post->title}}
-                                            <td class="adm are asb avz axq">
-                                            <input data-id="{{$post->id}}" class="toggle-class" type="checkbox"
-                                                data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                data-on="Active" data-off="InActive" {{ $post->active ? 'checked' : ''
-                                            }}></td>
+
+
+                                            <form action="/admin/change/{{$post->id}}" method='POST'>
+                                                @csrf
+                                                @method('PATCH')
+                                            <td>
+                                                <button name="active" value="{{ $post->active == 1 ? 0 : 1 }}">{{ $post->active == 1 ? 'switch off' : 'switch on' }}</button>
+                                            </td>
+                                            </form>
+
+
+
                                             <td class="ab adm asb atl aud avl avz awd cgm">
                                                 <a href="/admin/posts/{{$post->id}}/edit" class="ayg blh">Edit</a>
+                                            </td>
+                                            <td class="ab adm asb atl aud avl avz awd cgm">
+                                                <form action="/admin/posts/{{$post->id}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button>Delete</button>
+
+                                            </form>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -39,7 +55,6 @@
                 </div>
             </div>
         </div>
-
 
     </x-setting>
 

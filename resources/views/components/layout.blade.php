@@ -5,6 +5,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 
 <body style="font-family: Open Sans, sans-serif">
     <section class="px-6 py-8">
@@ -22,6 +24,7 @@
                     <x-slot name="trigger">
                          <button class="text-xs font-bold uppercase"> welcome, {{auth()->user()->name}}</button>
                         </x-slot>
+                        <x-dropdown-item href="/settings">settings</x-dropdown-item>
                         <x-dropdown-item href="/admin/posts">dashboard</x-dropdown-item>
                         <x-dropdown-item href="/admin/create">create post</x-dropdown-item>
                         <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">log out</x-dropdown-item>

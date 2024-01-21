@@ -13,11 +13,12 @@ class Post
     public $date;
     public $body;
 
-    public function __construct($title, $date, $body)
+    public function __construct($title, $date, $body, $active)
     {
         $this->title = $title;
         $this->date = $date;
         $this->body = $body;
+        $this->active = $active;
     }
 
 

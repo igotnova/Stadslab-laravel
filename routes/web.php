@@ -38,13 +38,23 @@ Route::post('register', [RegisterController::class, 'store'])->middleware('guest
 // login and logout
 Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
-
-
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
+
+// user setttings
+Route::Get('/settings', [RegisterController::class, 'show'])->middleware('auth');
+Route::post('/settings', [RegisterController::class, 'show'])->middleware('auth');
+Route::patch('/settings/update', [RegisterController::class, 'update'])->middleware('auth');
+
+
+
+
+
 // admin
-Route::get('/admin/create', [AdminPostController::class, 'create'])->middleware('admin');
-Route::post('/admin/posts', [AdminPostController::class, 'store'])->middleware('admin');
-Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('admin');
-Route::get('/admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
-Route::patch('/admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
+Route::get('/admin/create', [AdminPostController::class, 'create'])->middleware('auth');
+Route::post('/admin/posts', [AdminPostController::class, 'store'])->middleware('auth');
+Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('auth');
+Route::get('/admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('auth');
+Route::patch('/admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('auth');
+Route::delete('/admin/posts/{post}', [AdminPostController::class, 'destroy'])->middleware('admin');
+Route::patch('/admin/change/{post}', [AdminPostController::class, 'change'])->middleware('admin');
