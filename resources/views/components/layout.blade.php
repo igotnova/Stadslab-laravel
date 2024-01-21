@@ -16,12 +16,22 @@
             </div>
 
             <div class="mt-8 md:mt-0 flex items-center">
+
                 @auth
-                    <span class="text-xs font-bold uppercase"> welcome, {{auth()->user()->name}}</span>
-                    <form action="/logout" method="post" class="text-xs font-semibold ml-6">
-                        @csrf
-                        <button type="submit"> log out</button>
-                    </form>
+                <x-dropdown>
+                    <x-slot name="trigger">
+                         <button class="text-xs font-bold uppercase"> welcome, {{auth()->user()->name}}</button>
+                        </x-slot>
+                        <x-dropdown-item href="/admin/posts">dashboard</x-dropdown-item>
+                        <x-dropdown-item href="/admin/create">create post</x-dropdown-item>
+                        <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">log out</x-dropdown-item>
+
+                        <form action="/logout" method="post" class="hidden" id="logout-form">
+                            @csrf
+                        </form>
+
+                </x-dropdown>
+
 
                 @endauth
 

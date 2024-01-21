@@ -19,8 +19,10 @@ class CreatePostsTable extends Migration
             $table->foreignId("user_id");
             $table->string('slug')->unique();
             $table->string('title');
+            $table->string('thumbnail')->nullable();
             $table->text('excerpt');
             $table->text('body');
+            $table->boolean('active')->default(false);
             $table->string("writer")->nullable();
             $table->string("writer_account")->nullable();
             $table->timestamps();
