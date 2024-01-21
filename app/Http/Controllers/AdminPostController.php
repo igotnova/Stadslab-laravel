@@ -3,21 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class AdminPostController extends Controller
 {
     public function index()
     {
-        return view('admin.posts.index', [
-            'posts' =>  Post::paginate(50)
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
+        $posts = DB::table('posts')->where('user_id', $user->id)->paginate(50);
 
-        ]);
+        if ($user->is_admin) {
+            return view('admin.posts.index', [
+
+                'posts' =>  Post::paginate(50)
+
+            ]);
+        }else{
+            return view('admin.posts.index', [
+                'posts' =>   $posts
+
+            ]);
+
+        }
+
+
     }
 
     public function create()
